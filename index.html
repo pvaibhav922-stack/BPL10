@@ -1,86 +1,13 @@
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>BPL 10</title>
-<style>
-:root{--gold:#f4c15b;--orange:#f26b21;--red:#7f171c;--dark:#090b10;--panel:#141820;--muted:#aeb5c2}
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#08090d;color:#fff;overflow-x:hidden}
-body{background:radial-gradient(circle at 50% -10%,#69301f 0,#160f11 36%,#07080b 75%);min-height:100vh}
-button{font:inherit;touch-action:manipulation}
-.wrap{max-width:520px;margin:auto;padding:14px 14px 28px}.screen{display:none;min-height:calc(100vh - 28px)}.screen.active{display:block}
-.hero{text-align:center;padding:18px 0 10px}.crest{width:126px;height:126px;margin:auto;border-radius:50%;border:4px solid var(--gold);background:linear-gradient(145deg,#8d211b,#1a1720);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 5px #5d271e,0 16px 45px #0008}.crest b{font-size:34px;color:#ffd96d;text-shadow:2px 3px #4a120e}.title{font-size:38px;font-weight:1000;letter-spacing:2px;color:#ffd66b;text-shadow:0 4px #4d1111}.sub{font-size:13px;letter-spacing:3px;color:#eee;margin-top:-4px}.tag{display:inline-block;margin-top:8px;padding:6px 12px;border:1px solid #8c5e28;border-radius:99px;color:#ffd66b;background:#3b1715}
-.btn{width:100%;border:1px solid #a86f22;border-radius:14px;padding:15px 14px;margin:7px 0;background:linear-gradient(180deg,#f8c95e,#d98318);color:#201207;font-weight:900;box-shadow:0 6px 18px #0006}.btn.secondary{background:#151a22;color:#fff;border-color:#343b48}.btn:active{transform:scale(.98)}
-.panel{background:#11151cdd;border:1px solid #3a3f49;border-radius:18px;padding:14px;margin:12px 0;box-shadow:0 12px 35px #0007}.heading{font-weight:900;color:#ffd66b;font-size:18px;margin-bottom:10px}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.team{border:1px solid #454b56;border-radius:14px;padding:8px;background:#161b23;color:#fff;text-align:center}.team img{width:96px;height:96px;object-fit:contain;border-radius:50%;display:block;margin:auto}.team span{display:block;font-size:13px;font-weight:800;margin-top:5px}.team.sel{border-color:#ffd66b;box-shadow:0 0 0 2px #ffd66b44;background:#241c13}
-.players{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.player{padding:12px;border-radius:12px;border:1px solid #3b414d;background:#171c24;color:#fff;text-align:left}.player.sel{border-color:#ffd66b;background:#352516}.num{color:#ffd66b;font-weight:900;margin-right:6px}
-.scorebar{display:flex;justify-content:space-between;align-items:center;background:#10151c;border:1px solid #3d424b;border-radius:16px;padding:11px 13px;position:sticky;top:0;z-index:4}.score{font-size:27px;font-weight:1000;color:#ffd66b}.small{font-size:12px;color:#aeb5c2}.stadium{position:relative;height:220px;border-radius:18px;overflow:hidden;background:linear-gradient(#5d83b0 0 42%,#42612f 42% 100%);border:1px solid #4b535e}.stadium:before{content:"🏰";position:absolute;left:5%;top:5%;font-size:80px;opacity:.72}.crowd{position:absolute;left:0;right:0;top:30%;height:50px;background:repeating-linear-gradient(90deg,#243244 0 10px,#7a3e2e 10px 18px,#27394b 18px 28px);opacity:.85}.pitch{position:absolute;left:28%;right:28%;top:42%;bottom:-10%;background:#b68a55;transform:perspective(180px) rotateX(10deg);border:3px solid #d8b77b}.bat{position:absolute;left:50%;bottom:20px;transform:translateX(-50%);font-size:64px;z-index:2}.ball{position:absolute;left:50%;top:28px;transform:translateX(-50%);font-size:27px;transition:all .25s}.controls{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-top:10px}.shot{padding:15px 8px;border-radius:14px;border:1px solid #a86f22;background:#171c24;color:#fff;font-weight:900}.shot:active{background:#4b2e16;transform:scale(.97)}.message{text-align:center;min-height:42px;padding:9px;color:#ffd66b;font-weight:900;font-size:18px}.over{display:flex;gap:5px;flex-wrap:wrap}.dot{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#252b35;font-size:12px}.four{background:#16724d}.six{background:#c4491d}.wicket{background:#9e1d28}.zero{background:#333944}.result{text-align:center;padding:25px 8px}.big{font-size:54px;font-weight:1000;color:#ffd66b}.hint{font-size:12px;color:#aeb5c2;line-height:1.5}
-</style>
-</head>
-<body>
-<div class="wrap">
-<section id="home" class="screen active">
- <div class="hero"><div class="crest"><b>BPL<br>10</b></div><div class="title">BPL 10</div><div class="sub">BALEWADI PREMIERE LEAGUE</div><div class="tag">⚔ RAIGAD SPIRIT • 5 OVERS</div></div>
- <div class="panel"><div class="heading">🏏 Welcome to BPL 10</div><div class="hint">Maharashtra warrior theme • Batting-only quick match • 5 overs</div></div>
- <button class="btn" id="start">⚔ QUICK MATCH</button>
- <button class="btn secondary" id="info">👥 PLAYER POOL</button>
-</section>
-
-<section id="teams" class="screen">
- <div class="heading">SELECT TEAM</div><div class="hint">Choose your BPL 10 warrior squad.</div>
- <div id="teamGrid" class="grid" style="margin-top:12px"></div>
- <button class="btn" id="toPlayers">CONTINUE →</button>
-</section>
-
-<section id="players" class="screen">
- <div class="heading">SELECT BATTER</div><div id="chosenTeam" class="small"></div>
- <div id="playerGrid" class="players" style="margin-top:12px"></div>
- <button class="btn" id="play">START 5-OVER MATCH 🏏</button>
-</section>
-
-<section id="game" class="screen">
- <div class="scorebar"><div><div class="small" id="teamLabel"></div><div class="score" id="score">0/0</div></div><div class="small"><b id="overText">0.0</b> / 5 overs<br>Bat: <b id="batterLabel">Vaibhav</b></div></div>
- <div class="stadium"><div class="crowd"></div><div class="pitch"></div><div class="ball" id="ball">🔴</div><div class="bat">🏏</div></div>
- <div id="msg" class="message">Choose your shot!</div>
- <div class="over" id="balls"></div>
- <div class="controls">
-  <button class="shot" data-shot="DEFENCE">🛡️ DEFENCE</button>
-  <button class="shot" data-shot="DRIVE">🏏 DRIVE</button>
-  <button class="shot" data-shot="LOFT">🚀 LOFT</button>
-  <button class="shot" data-shot="SWEEP">⚡ SWEEP</button>
- </div>
- <button class="btn secondary" id="quit">⏸ END INNINGS</button>
-</section>
-
-<section id="result" class="screen">
- <div class="result"><div class="heading">INNINGS OVER</div><div id="resultTeam" class="small"></div><div id="final" class="big">0/0</div><div id="oversFinal" class="small">5.0 OVERS</div><div id="resultMsg" class="heading" style="margin-top:20px"></div></div>
- <button class="btn" id="again">PLAY AGAIN</button><button class="btn secondary" id="change">CHANGE TEAM</button><button class="btn secondary" id="homeBtn">HOME</button>
-</section>
-
-<section id="infoScreen" class="screen">
- <div class="heading">BPL 10 PLAYER POOL</div><div id="allPlayers" class="players"></div><button class="btn secondary" id="backHome">← BACK</button>
-</section>
-</div>
+<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"><title>BPL 10 V2</title><style>
+*{box-sizing:border-box}body{margin:0;background:#07090d;color:#fff;font-family:Arial,sans-serif;overflow:hidden}.s{display:none;height:100vh;padding:16px;background:radial-gradient(circle at 50% 0,#552113,#08090d 58%)}.s.a{display:block}.top{display:flex;justify-content:space-between;align-items:center;color:#ffd45b;font-weight:900}.card{background:#141822dd;border:1px solid #80531e;border-radius:18px;padding:14px;margin:12px 0}.btn{width:100%;padding:14px;border-radius:14px;border:1px solid #9a6720;background:#171c26;color:#fff;font-weight:800;font-size:17px;margin:6px 0}.gold{background:linear-gradient(#ffd15b,#df8c16);color:#17100a;border:0}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.team{padding:14px;border-radius:16px;background:#151a24;color:white;border:1px solid #80531e;font-weight:800}.team small{display:block;color:#bbb;margin-top:6px}.pl{display:flex;justify-content:space-between;padding:12px;background:#151923;border-radius:12px;margin:6px 0;border:1px solid #303543}.rt{color:#ffd45b;font-weight:900}
+#game{padding:0;background:#111}.hud{position:absolute;top:8px;left:8px;right:8px;z-index:10;background:#111722eF;border:1px solid #875a23;border-radius:13px;padding:9px;display:flex;justify-content:space-between}.field{position:absolute;inset:0;background:linear-gradient(#7194bc 0 36%,#31552b 36%)}.stands{position:absolute;top:25%;left:0;right:0;height:12%;background:repeating-linear-gradient(90deg,#263a50 0 30px,#8b4c38 30px 45px)}.pitch{position:absolute;left:27%;width:46%;top:37%;bottom:7%;background:#bd965f;border:5px solid #d6ad70;transform:perspective(600px) rotateX(7deg)}.crease{position:absolute;left:10%;right:10%;bottom:16%;height:3px;background:#fff}.batter{position:absolute;left:50%;bottom:17%;width:78px;height:160px;z-index:5;transform:translateX(-50%)}.head{width:38px;height:38px;background:#9a5b35;border:5px solid #272727;border-radius:50%;margin:auto}.shirt{width:52px;height:72px;background:#a9251b;border-radius:15px;margin:auto}.leg{display:inline-block;width:16px;height:50px;background:#222;margin:0 5px}.bat{position:absolute;width:13px;height:96px;background:#e28b2c;border:2px solid #6a3b12;border-radius:5px;right:-17px;top:62px;transform:rotate(-35deg)}.bowler{position:absolute;left:50%;top:32%;z-index:3}.bhead{width:25px;height:25px;background:#9a5b35;border-radius:50%;margin:auto}.bbody{width:30px;height:50px;background:#243d77;border-radius:10px}.ball{position:absolute;width:18px;height:18px;border-radius:50%;background:#e12b2b;z-index:6;left:49%;top:42%;box-shadow:0 0 10px #ff8b70}.msg{position:absolute;z-index:9;left:50%;top:47%;transform:translate(-50%,-50%) scale(.6);opacity:0;font-size:50px;font-weight:1000;color:#ffd45b;text-shadow:0 4px #512000;white-space:nowrap}.controls{position:absolute;z-index:8;bottom:14px;left:12px;right:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px}.controls button{padding:15px;border-radius:14px;border:1px solid #a66d1f;background:#131923eF;color:white;font-size:17px;font-weight:900}.small{color:#aaa;text-align:center;font-size:12px}
+</style></head><body>
+<section id="home" class="s a"><div class="top"><b style="font-size:25px">🏏 BPL 10</b><span>V2</span></div><div class="card" style="text-align:center;margin-top:70px"><div style="font-size:70px">🏰</div><h1 style="color:#ffd45b">BALEWADI PREMIERE LEAGUE</h1><p>RAIGAD SPIRIT • FAST CRICKET</p></div><button class="btn gold" onclick="show('teams')">🏏 QUICK MATCH • 5 OVERS</button><button class="btn">🏆 TOURNAMENT • COMING SOON</button></section>
+<section id="teams" class="s"><h2 style="color:#ffd45b;text-align:center">SELECT TEAM</h2><div id="tg" class="grid"></div></section>
+<section id="players" class="s"><h2 style="color:#ffd45b;text-align:center">SELECT PLAYER</h2><div id="pg"></div><button class="btn gold" onclick="start()">START MATCH</button></section>
+<section id="game" class="s"><div class="field"></div><div class="stands"></div><div class="hud"><div><b id="tn">RAIGAD RANVEER</b><br><b id="sc">0/0</b></div><div style="text-align:right"><span id="ov">0.0 / 5</span><br>Bat: <b id="bn">Vaibhav</b></div></div><div class="pitch"><div class="crease"></div></div><div class="bowler"><div class="bhead"></div><div class="bbody"></div></div><div id="bat" class="batter"><div class="head"></div><div class="shirt"></div><div class="leg"></div><div class="leg"></div><div class="bat"></div></div><div id="ball" class="ball"></div><div id="msg" class="msg"></div><div class="controls"><button onclick="shot('DEFENCE')">🛡️ DEFENCE</button><button onclick="shot('DRIVE')">🏏 DRIVE</button><button onclick="shot('LOFT')">🚀 LOFT</button><button onclick="shot('SWEEP')">⚡ SWEEP</button></div></section>
+<section id="result" class="s"><h1 style="color:#ffd45b;text-align:center">INNINGS OVER</h1><div class="card" style="text-align:center"><h2 id="ft">RAIGAD RANVEER</h2><div id="fs" style="font-size:52px;color:#ffd45b;font-weight:900">0/0</div><p id="detail"></p></div><button class="btn gold" onclick="start()">🏏 PLAY AGAIN</button><button class="btn" onclick="show('teams')">🔄 CHANGE TEAM</button></section>
 <script>
-const teams=[
- {n:"रायगड रणवीर",e:"raigad_ranveer.jpg"},{n:"रायगड पराक्रमी",e:"raigad_parakrami.jpg"},
- {n:"सिंहगड रक्षक",e:"sinhagad_rakshak.jpg"},{n:"पन्हाळा शूरवीर",e:"panhala_shurveer.jpg"},
- {n:"शिवनेरी योद्धा",e:"shivneri_yoddha.jpg"},{n:"प्रतापगड शिलेदार",e:"pratapgad_shiledar.jpg"}];
-const players=["Vaibhav","Justii","Bandy","N.b","Vastya","Amol","Aj","Mahi","Dhiru","Akash","Re","Pratik","Uttam","Kiran"];
-let team=0, batter=0, runs=0,wk=0,balls=0,events=[],ended=false;
-const $=id=>document.getElementById(id);
-function show(id){document.querySelectorAll(".screen").forEach(x=>x.classList.remove("active"));$(id).classList.add("active");window.scrollTo(0,0)}
-function setupTeams(){ $("teamGrid").innerHTML=teams.map((t,i)=>`<button class="team ${i===team?"sel":""}" data-i="${i}"><img src="teams/${t.e}" alt="${t.n}"><span>${t.n}</span></button>`).join("");document.querySelectorAll(".team").forEach(x=>x.onclick=()=>{team=+x.dataset.i;setupTeams()})}
-function setupPlayers(){$("chosenTeam").textContent="Team: "+teams[team].n;$("playerGrid").innerHTML=players.map((p,i)=>`<button class="player ${i===batter?"sel":""}" data-i="${i}"><span class="num">${i+1}</span>${p}</button>`).join("");document.querySelectorAll(".player").forEach(x=>x.onclick=()=>{batter=+x.dataset.i;setupPlayers()})}
-function reset(){runs=0;wk=0;balls=0;events=[];ended=false;renderGame()}
-function renderGame(){$("score").textContent=runs+"/"+wk;$("overText").textContent=Math.floor(balls/6)+"."+(balls%6);$("batterLabel").textContent=players[batter];$("teamLabel").textContent=teams[team].n;$("balls").innerHTML=events.slice(-6).map(x=>`<span class="dot ${x===6||x===4?(x===6?"six":"four"):x==="W"?"wicket":x===0?"zero":""}">${x}</span>`).join("")}
-function playShot(kind){if(ended)return;const risk={DEFENCE:.06,DRIVE:.13,LOFT:.24,SWEEP:.16}[kind];let r=Math.random(),out="";if(r<risk){wk++;out="W"}else{const table={DEFENCE:[0,0,1,1,2],DRIVE:[0,1,2,4,4,6],LOFT:[0,1,4,6,6,6],SWEEP:[0,1,2,4,6]}[kind];out=table[Math.floor(Math.random()*table.length)];runs+=out}balls++;events.push(out);$("msg").textContent=out==="W"?"💥 WICKET!":out===6?"🔥 SIX!":out===4?"🚀 FOUR!":out===0?"Dot ball":"🏏 "+out+" run"+(out>1?"s":"")+"!";$("ball").style.top=(35+Math.random()*45)+"%";$("ball").style.left=(30+Math.random()*40)+"%";renderGame();if(balls>=30||wk>=5)finish()}
-function finish(){ended=true;$("final").textContent=runs+"/"+wk;$("oversFinal").textContent=(Math.floor(balls/6)+"."+(balls%6))+" OVERS";$("resultTeam").textContent=teams[team].n+" • "+players[batter];$("resultMsg").textContent=runs>=45?"🏆 MASSIVE INNINGS!":runs>=30?"🔥 GREAT BATTING!":"👏 GOOD INNINGS!";show("result")}
-teams.forEach(t=>{});
-$("start").onclick=()=>{setupTeams();show("teams")};$("info").onclick=()=>{$("allPlayers").innerHTML=players.map((p,i)=>`<div class="player"><span class="num">${i+1}</span>${p}</div>`).join("");show("infoScreen")};$("backHome").onclick=()=>show("home");
-$("toPlayers").onclick=()=>{setupPlayers();show("players")};$("play").onclick=()=>{reset();show("game")};
-document.querySelectorAll(".shot").forEach(b=>b.onclick=()=>playShot(b.dataset.shot));$("quit").onclick=finish;
-$("again").onclick=()=>{reset();show("game")};$("change").onclick=()=>{setupTeams();show("teams")};$("homeBtn").onclick=()=>show("home");
-</script>
-</body></html>
+const teams=['Raigad Ranveer','Raigad Parakrami','Sinhagad Rakshak','Panhala Shurveer','Shivneri Yoddha','Pratapgad Shiledar'];const ps=[['Vaibhav',92],['Justii',85],['Bandy',78],['N.b',80],['Vastya',76],['Amol',83],['Aj',79],['Mahi',81],['Dhiru',77],['Akash',75],['Re',72],['Pratik',78],['Uttam',76],['Kiran',74]];let ti=0,pi=0,r=0,w=0,b=0,f=0,sx=0;
+function show(id){document.querySelectorAll('.s').forEach(x=>x.classList.remove('a'));document.getElementById(id).classList.add('a')}function render(){tg.innerHTML=teams.map((x,i)=>`<button class="team" onclick="ti=${i};renderP()"><div style="font-size:38px">🏰</div>${x}<small>${['रायगड रणवीर','रायगड पराक्रमी','सिंहगड रक्षक','पन्हाळा शूरवीर','शिवनेरी योद्धा','प्रतापगड शिलेदार'][i]}</small></button>`).join('');renderP()}function renderP(){pg.innerHTML=ps.map((x,i)=>`<div class="pl" onclick="pi=${i};renderP()"><span>${i+1}. ${x[0]} ${pi===i?'🟡':''}</span><span class="rt">${x[1]}</span></div>`).join('')}function start(){r=w=b=f=sx=0;tn.textContent=teams[ti].toUpperCase();bn.textContent=ps[pi][0];show('game');upd()}function upd(){sc.textContent=`${r}/${w}`;ov.textContent=`${Math.floor(b/6)}.${b%6} / 5`}function shot(t){if(b>=30)return end();b++;let q=Math.random(),v=0; if(q<.055){w++;flash('WICKET!')}else{let ranges={DEFENCE:[0,.8,.95,0,0],DRIVE:[0,.08,.52,.91,1],LOFT:[0,.16,.48,.73,1],SWEEP:[0,.1,.55,.92,1]}[t];if(q<ranges[1])v=0;else if(q<ranges[2])v=1;else if(q<ranges[3])v=2;else v=q<.96?4:6;if(v===4){f++;flash('FOUR!')}else if(v===6){sx++;flash('SIX!')}else flash(v===0?'DOT BALL':'+'+v);r+=v}upd();if(b>=30)setTimeout(end,700)}function flash(x){msg.textContent=x;msg.style.opacity=1;msg.style.transform='translate(-50%,-50%) scale(1)';bat.animate([{transform:'translateX(-50%) rotate(0)'},{transform:'translateX(-50%) rotate(16deg)'},{transform:'translateX(-50%) rotate(0)'}],{duration:400});ball.animate([{left:'49%',top:'42%'},{left:'48%',top:'27%'},{left:'50%',top:'42%'}],{duration:430});setTimeout(()=>{msg.style.opacity=0;msg.style.transform='translate(-50%,-50%) scale(.6)'},600)}function end(){show('result');ft.textContent=teams[ti].toUpperCase();fs.textContent=`${r}/${w}`;detail.textContent=`${Math.floor(b/6)}.${b%6} overs • ${f} fours • ${sx} sixes • ${ps[pi][0]} batting`}render();
+</script></body></html>
